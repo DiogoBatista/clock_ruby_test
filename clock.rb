@@ -6,15 +6,11 @@ class Clock
   attr_reader :hour, :minute
 
   def initialize(hour: 0, minute: 0)
-    @minutes = hour * 60 + minute
+    @minutes = calculate_hours(hour) + minute
   end
 
   def to_s
     format('%02i:%02i', *time)
-  end
-
-  def time
-    [@minutes / MINUTES_IN_HOUR % HOURS_IN_DAY, @minutes % MINUTES_IN_HOUR]
   end
 
   def hours
@@ -26,7 +22,22 @@ class Clock
   end
 
   def +(clock)
-    @minutes += clock.hours * MINUTES_IN_HOUR + clock.minutes
+    @minutes += calculate_hours(clock.hours) + clock.minutes
     self
+  end
+
+  def -(clock)
+    @minutes += -calculate_hours(clock.hours) - clock.minutes
+    self
+  end
+
+  private
+
+  def time
+    [@minutes / MINUTES_IN_HOUR % HOURS_IN_DAY, @minutes % MINUTES_IN_HOUR]
+  end
+
+  def calculate_hours(hours)
+    hours * MINUTES_IN_HOUR
   end
 end
