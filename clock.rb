@@ -31,6 +31,10 @@ class Clock
     self
   end
 
+  def ==(other)
+    to_s == other.to_s
+  end
+
   private
 
   def time
