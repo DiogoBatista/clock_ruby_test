@@ -16,4 +16,17 @@ class Clock
   def time
     [@minutes / MINUTES_IN_HOUR % HOURS_IN_DAY, @minutes % MINUTES_IN_HOUR]
   end
+
+  def hours
+    @minutes / MINUTES_IN_HOUR % HOURS_IN_DAY
+  end
+
+  def minutes
+    @minutes % MINUTES_IN_HOUR
+  end
+
+  def +(clock)
+    @minutes += clock.hours * MINUTES_IN_HOUR + clock.minutes
+    self
+  end
 end
