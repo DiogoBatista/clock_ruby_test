@@ -130,7 +130,7 @@ class ClockTest < Minitest::Test
   end
 
   def test_add_across_midnight
-    skip
+    # skip
     clock1 = Clock.new(hour: 23, minute: 59)
     assert_equal '00:01', (clock1 + Clock.new(minute: 2)).to_s
   end
@@ -304,7 +304,7 @@ class ClockTest < Minitest::Test
   # refactor your logic.
 
   def test_calling_to_s_does_not_get_in_the_way_of_operations
-    skip
+    # skip
     clock1 = Clock.new(hour: 12, minute: 0)
     clock2 = Clock.new(hour: 0, minute: 34)
 
@@ -315,7 +315,7 @@ class ClockTest < Minitest::Test
   end
 
   def test_adding_two_clocks_does_not_change_either_clock
-    skip
+    # skip
     clock1 = Clock.new(hour: 12, minute: 0)
     clock2 = Clock.new(hour: 0, minute: 34)
     _clock3 = clock1 + clock2
@@ -325,7 +325,7 @@ class ClockTest < Minitest::Test
   end
 
   def test_subtracting_two_clocks_does_not_change_either_clock
-    skip
+    # skip
     clock1 = Clock.new(hour: 12, minute: 0)
     clock2 = Clock.new(hour: 0, minute: 34)
     _clock3 = clock1 - clock2

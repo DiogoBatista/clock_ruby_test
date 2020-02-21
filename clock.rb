@@ -6,7 +6,7 @@ class Clock
   attr_reader :hour, :minute
 
   def initialize(hour: 0, minute: 0)
-    @minutes = calculate_hours(hour) + minute
+    @minutes = minutes_from_hours(hour) + minute
   end
 
   def to_s
@@ -14,20 +14,20 @@ class Clock
   end
 
   def hours
-    @minutes / MINUTES_IN_HOUR % HOURS_IN_DAY
+    hours_by_day
   end
 
   def minutes
-    @minutes % MINUTES_IN_HOUR
+    minutes_by_hour
   end
 
   def +(clock)
-    @minutes += calculate_hours(clock.hours) + clock.minutes
+    @minutes += minutes_from_hours(clock.hours) + clock.minutes
     self
   end
 
   def -(clock)
-    @minutes += -calculate_hours(clock.hours) - clock.minutes
+    @minutes += -minutes_from_hours(clock.hours) - clock.minutes
     self
   end
 
@@ -38,10 +38,18 @@ class Clock
   private
 
   def time
-    [@minutes / MINUTES_IN_HOUR % HOURS_IN_DAY, @minutes % MINUTES_IN_HOUR]
+    [hours_by_day, minutes_by_hour]
   end
 
-  def calculate_hours(hours)
+  def minutes_from_hours(hours)
     hours * MINUTES_IN_HOUR
+  end
+
+  def hours_by_day
+    @minutes / MINUTES_IN_HOUR % HOURS_IN_DAY
+  end
+
+  def minutes_by_hour
+    @minutes % MINUTES_IN_HOUR
   end
 end
